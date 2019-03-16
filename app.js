@@ -10,10 +10,10 @@ app.get('/', (req, res, next) =>
   res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/products', (req, res, next) => {
-  Product.findAll().then(product => res.send(product));
+  Product.findAll().then(products => res.send(products));
 });
 
-app.post('/api/products');
+app.post('/src/products');
 
 app.delete('/products/:id', (req, res, next) => {
   Product.destroy({ where: { productId: req.params.id } });
