@@ -1,12 +1,12 @@
 import React from "react";
 
-class Products extends React.Component {
+class Sales extends React.Component {
   render() {
-    // const products = this.props.products;
     return (
       <div>
+        <h3>Sales!</h3>
         <ul>
-          {this.props.products.map(product => {
+          {this.props.onsale.map(product => {
             return (
               <li key={product.id}>
                 <div>{product.name}</div>
@@ -21,4 +21,4 @@ class Products extends React.Component {
   }
 }
 
-export default Products;
+export default Sales;
