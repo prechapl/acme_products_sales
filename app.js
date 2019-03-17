@@ -16,7 +16,7 @@ app.get('/products', (req, res, next) => {
 app.post('/src/products');
 
 app.delete('/products/:id', (req, res, next) => {
-  Product.destroy({ where: { productId: req.params.id } });
+  Product.destroy({ where: { id: req.params.id } });
   res.sendStatus(204);
   next();
 });

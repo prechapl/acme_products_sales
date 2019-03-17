@@ -1,17 +1,51 @@
-import React from "react";
+import React from 'react';
 
 class Products extends React.Component {
   render() {
-    // const products = this.props.products;
+    function saleCheck(product) {
+      const salePrice = product.price - product.price * product.salePercentage;
+      if (product.salePercentage > 0) {
+        return (
+          <li className="list-group-item">
+            <p>
+              <s>Price ${product.price}</s>
+            </p>
+            <div>Sale Price ${salePrice}</div>
+          </li>
+        );
+      } else {
+        return <li className="list-group-item">Price ${product.price}</li>;
+      }
+    }
+
+    console.log(this.props);
+
     return (
       <div>
-        <ul>
+        <ul className="list-group">
           {this.props.products.map(product => {
             return (
-              <li key={product.id}>
-                <div>{product.name}</div>
-                <div>{product.price}</div>
-                <div>{product.availabilty}</div>
+              <li className="list-group-item" key={product.id}>
+                <ul>
+                  <li className="list-group-item">
+                    {product.name}
+                    <button
+                      type="button"
+                      onClick={() => this.props.destroyProduct(product.id)}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                  {saleCheck(product)}
+                  <div className="col">
+                    <div
+                      style={{ margin: '10px' }}
+                      className="badge badge-secondary"
+                    >
+                      {product.availabilty}
+                    </div>
+                  </div>
+                </ul>
               </li>
             );
           })}

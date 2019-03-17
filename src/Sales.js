@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 class Sales extends React.Component {
   render() {
     return (
       <div>
-        <h3>Sales!</h3>
+        {/* <h3>Sales!</h3> */}
         <ul>
           {this.props.onsale.map(product => {
             return (
