@@ -4,6 +4,7 @@ import Products from './Products';
 import Home from './Home';
 import Nav from './Nav';
 import Sales from './Sales';
+import Form from './CreateProducts';
 import axios from 'axios';
 
 class App extends Component {
@@ -13,6 +14,8 @@ class App extends Component {
       products: []
     };
     this.destroyProduct = this.destroyProduct.bind(this);
+    this.saleCheck = this.saleCheck.bind(this);
+    this.availabilityCheck = this.availabilityCheck.bind(this);
   }
 
   destroyProduct(id) {
@@ -34,6 +37,39 @@ class App extends Component {
       .catch();
   }
 
+  saleCheck(product) {
+    const discount = product.salePercentage;
+    const price = product.price;
+    const salePrice = price - price * discount;
+    if (discount > 0) {
+      return (
+        <li className="list-group-item">
+          <s>Price ${price}</s>
+          <div>Sale Price ${salePrice.toFixed(2)}</div>
+        </li>
+      );
+    } else {
+      return <li className="list-group-item">Price ${price}</li>;
+    }
+  }
+
+  availabilityCheck(product) {
+    const instock = <span className="badge badge-success">In Stock</span>;
+    const backordered = (
+      <span className="badge badge-warning">Back Ordered</span>
+    );
+    const discontinued = (
+      <span className="badge badge-danger">Discontinued</span>
+    );
+    if (product.availability === 'instock') {
+      return instock;
+    } else if (product.availability === 'backordered') {
+      return backordered;
+    } else {
+      return discontinued;
+    }
+  }
+
   render() {
     const products = this.state.products;
     const onsale = products.filter(product => product.salePercentage > 0);
@@ -41,7 +77,6 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          {/* <h3>Acme Product Sales by Preston</h3> */}
           <Route component={Nav} />
           <Route exact path="/home" component={Home} />
           <Route
@@ -51,10 +86,24 @@ class App extends Component {
               <Products
                 products={products}
                 destroyProduct={this.destroyProduct}
+                saleCheck={this.saleCheck}
+                availabilityCheck={this.availabilityCheck}
               />
             )}
           />
-          <Route exact path="/sales" render={() => <Sales onsale={onsale} />} />
+          <Route
+            exact
+            path="/sales"
+            render={() => (
+              <Sales
+                onsale={onsale}
+                destroyProduct={this.destroyProduct}
+                saleCheck={this.saleCheck}
+                availabilityCheck={this.availabilityCheck}
+              />
+            )}
+          />
+          <Route path="/create" component={Form} />
         </Fragment>
       </Router>
     );

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Nav = ({ location }) => {
   const pathname = location.pathname;
-  const links = ['/home', '/products', '/sales'];
+  const links = ['/home', '/products', '/sales', '/create'];
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navBar-brand" href="#">

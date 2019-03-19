@@ -1,0 +1,24 @@
+<form _lpchecked="1"><div><label>Name</label><input class="form-control" name="name" value="" div><div><label>Price</label><input class="form-control" name="price" value=""></div><div><label>Discount Percentage</label><input class="form-control" name="discountPercent" value=""></div><div><label>Availability</label><select class="form-control"><option>instock</option><option>backordered</option><option>discontinued</option></select></div><button class="btn btn-primary" disabled="" style="margin-top: 10px;">Create</button>
+</form>
+
+    <form _lpchecked="1" onSubmit={this.handleSubmit}>
+          <label htmlFor="name"> Name: </label>
+          <input name="name" onChange={this.handleChange} value={name} />
+          <label htmlFor="price"> Price: </label>
+          <input name="price" onChange={this.handleChange} value={price} />
+          <label htmlFor="salePercentage"> Discount Percentage: </label>
+          <input
+            name="salePercentage"
+            onChange={this.handleChange}
+            value={salePercentage}
+          />
+          <label htmlFor="availability"> Availability: </label>
+          <input
+          class="form-control"
+
+            name="availability"
+            onChange={this.handleChange}
+            value={availability}
+          />
+          <button type="submit">Create Product</button>
+        </form>

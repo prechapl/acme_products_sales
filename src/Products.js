@@ -2,23 +2,7 @@ import React from 'react';
 
 class Products extends React.Component {
   render() {
-    function saleCheck(product) {
-      const salePrice = product.price - product.price * product.salePercentage;
-      if (product.salePercentage > 0) {
-        return (
-          <li className="list-group-item">
-            <p>
-              <s>Price ${product.price}</s>
-            </p>
-            <div>Sale Price ${salePrice}</div>
-          </li>
-        );
-      } else {
-        return <li className="list-group-item">Price ${product.price}</li>;
-      }
-    }
-
-    console.log(this.props);
+    console.log('props via Products ', this.props);
 
     return (
       <div>
@@ -27,23 +11,21 @@ class Products extends React.Component {
             return (
               <li className="list-group-item" key={product.id}>
                 <ul>
-                  <li className="list-group-item">
-                    {product.name}
-                    <button
-                      type="button"
-                      onClick={() => this.props.destroyProduct(product.id)}
-                    >
-                      Delete
-                    </button>
-                  </li>
-                  {saleCheck(product)}
-                  <div className="col">
-                    <div
-                      style={{ margin: '10px' }}
-                      className="badge badge-secondary"
-                    >
-                      {product.availabilty}
+                  <li className="list-group-item ">
+                    <div>{product.name}</div>
+                    <div className="d-flex justify-content-end">
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        type="button"
+                        onClick={() => this.props.destroyProduct(product.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
+                  </li>
+                  {this.props.saleCheck(product)}
+                  <div style={{ margin: '10px' }}>
+                    {this.props.availabilityCheck(product)}
                   </div>
                 </ul>
               </li>

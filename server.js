@@ -5,10 +5,30 @@ const conn = require('./db/conn');
 const port = process.env.PORT || 3000;
 
 const products = [
-  { name: 'Foo', price: 3, salePercentage: 0.2, availabilty: 'instock' },
-  { name: 'Bar', price: 8, salePercentage: 0.0, availabilty: 'instock' },
-  { name: 'Bazz', price: 4, salePercentage: 0.0, availabilty: 'backordered' },
-  { name: 'Quq', price: 2, salePercentage: 0.0, availabilty: 'discontinued' }
+  {
+    name: 'Foo',
+    price: '3.00',
+    salePercentage: '0.20',
+    availability: 'instock'
+  },
+  {
+    name: 'Bar',
+    price: '8.00',
+    salePercentage: '0.00',
+    availability: 'instock'
+  },
+  {
+    name: 'Bazz',
+    price: '4.00',
+    salePercentage: '0.00',
+    availability: 'backordered'
+  },
+  {
+    name: 'Quq',
+    price: '2.00',
+    salePercentage: '0.00',
+    availability: 'discontinued'
+  }
 ];
 
 const syncAndSeed = () => {
