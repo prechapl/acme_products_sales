@@ -22,3 +22,74 @@
           />
           <button type="submit">Create Product</button>
         </form>
+
+        <div className="dropdown">
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              availability
+            </button>
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a className="dropdown-item" href="#">
+                instock
+              </a>
+              <a className="dropdown-item" href="#">
+                backordered
+              </a>
+              <a className="dropdown-item" href="#">
+                discontinued
+              </a>
+            </div>
+          </div>
+
+
+
+          <label htmlFor="availability"> Availability: </label>
+          <input
+            className="dropdown"
+            name="availability"
+            onChange={this.handleChange}
+            value={availability}
+          />
+
+          ????
+
+
+          return (
+            <nav className="navbar navbar-expand-sm navbar-light bg-light">
+              <a className="navBar-brand mb-0 h1" href="#">
+                ACME
+              </a>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                  {links.map(link => (
+                    <li className="nav-item" key={link}>
+                      <Link
+                        to={link}
+                        className={`nav-link${link === pathname ? ' active' : ''}`}
+                      >
+                        {link.slice(1)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </nav>
+          );

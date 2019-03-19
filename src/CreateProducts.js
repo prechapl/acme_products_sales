@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Form extends Component {
@@ -9,10 +10,11 @@ class Form extends Component {
       name: '',
       price: '0.00',
       salePercentage: '0.00',
-      availability: ''
+      availability: 'instock'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
     // console.log('props ', this.props);
   }
 
@@ -36,48 +38,56 @@ class Form extends Component {
     const name = this.state.name;
     const price = this.state.price;
     const salePercentage = this.state.salePercentage;
-    const availability = this.state.availability;
+    // const availability = this.state.availability;
 
-    console.log('state ', this.state);
+    // console.log('state ', this.state);
 
     return (
-      <div className="form-group">
-        <form onSubmit={this.handleSubmit} className="form-inline">
-          <label htmlFor="name"> Name: </label>
-          <input name="name" onChange={this.handleChange} value={name} />
-          <label htmlFor="price"> Price: </label>
-          <input name="price" onChange={this.handleChange} value={price} />
-          <label htmlFor="salePercentage"> Discount Percentage: </label>
-          <input
-            name="salePercentage"
-            onChange={this.handleChange}
-            value={salePercentage}
-          />
-
-          <div className="dropdown">
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Availability
-            </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a className="dropdown-item" href="#">
-                instock
-              </a>
-              <a className="dropdown-item" href="#">
-                backordered
-              </a>
-              <a className="dropdown-item" href="#">
-                discontinued
-              </a>
-            </div>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name"> Name: </label>
+            <input
+              className="form-control form-control-sm"
+              name="name"
+              onChange={this.handleChange}
+              value={name}
+              placeholder="enter product"
+            />
           </div>
-          <button type="submit">Create Product</button>
+          <div className="form-group">
+            <label htmlFor="price"> Price: </label>
+            <input
+              className="form-control form-control-sm"
+              name="price"
+              onChange={this.handleChange}
+              value={price}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="salePercentage"> Discount Percentage: </label>
+            <input
+              className="form-control form-control-sm"
+              name="salePercentage"
+              onChange={this.handleChange}
+              value={salePercentage}
+            />
+          </div>
+          <div className="form-group">
+            <select
+              className="dropdown"
+              name="availability"
+              onChange={this.handleChange}
+            >
+              <option value="instock">instock</option>
+              <option value="backordered">backordered</option>
+              <option value="discontinued">discontinued</option>
+            </select>
+          </div>
+
+          <button type="submit" onChange={this.handleChange}>
+            Create Product
+          </button>
         </form>
       </div>
     );
