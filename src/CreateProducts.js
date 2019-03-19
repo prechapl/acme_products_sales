@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Form extends Component {
   constructor() {
     super();
     this.state = {
-      // fields: ['name', 'price', 'discount'],
-      name: '',
-      price: '0.00',
-      salePercentage: '0.00',
-      availability: 'instock'
+      name: "",
+      price: "0.00",
+      salePercentage: "0.00",
+      availability: "instock"
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,16 +20,16 @@ class Form extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     const { name, price, salePercentage, availability } = this.state;
-    // console.log(salePercentage);
     axios
-      .post('/products', { name, price, salePercentage, availability })
+      .post("/products", { name, price, salePercentage, availability })
       .then(res => res.data)
-      .then(data => console.log(data))
+      .then(() => this.props.history.push("/products"))
+      .then(() => this.props.refreshProducts())
       .catch(e => console.log(e));
   }
 
   handleChange({ target }) {
-    console.log('target ', target);
+    console.log("target ", target);
     this.setState({ [target.name]: target.value });
   }
 

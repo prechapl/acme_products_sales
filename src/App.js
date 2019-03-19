@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
-import Products from './Products';
-import Home from './Home';
-import Nav from './Nav';
-import Sales from './Sales';
-import Form from './CreateProducts';
-import axios from 'axios';
+import React, { Component, Fragment } from "react";
+import { HashRouter as Router, Route } from "react-router-dom";
+import Products from "./Products";
+import Home from "./Home";
+import Nav from "./Nav";
+import Sales from "./Sales";
+import Form from "./CreateProducts";
+import axios from "axios";
 
 class App extends Component {
   constructor() {
@@ -16,6 +16,15 @@ class App extends Component {
     this.destroyProduct = this.destroyProduct.bind(this);
     this.saleCheck = this.saleCheck.bind(this);
     this.availabilityCheck = this.availabilityCheck.bind(this);
+    this.refreshProducts = this.refreshProducts.bind(this);
+  }
+
+  refreshProducts() {
+    axios
+      .get("/products")
+      .then(res => res.data)
+      .then(products => this.setState({ products }))
+      .catch();
   }
 
   destroyProduct(id) {
@@ -31,7 +40,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get('/products')
+      .get("/products")
       .then(res => res.data)
       .then(products => this.setState({ products }))
       .catch();
@@ -61,9 +70,9 @@ class App extends Component {
     const discontinued = (
       <span className="badge badge-danger">Discontinued</span>
     );
-    if (product.availability === 'instock') {
+    if (product.availability === "instock") {
       return instock;
-    } else if (product.availability === 'backordered') {
+    } else if (product.availability === "backordered") {
       return backordered;
     } else {
       return discontinued;
@@ -103,7 +112,13 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/create" component={Form} />
+          <Route
+            path="/create"
+            render={({ history }) => (
+              <Form refreshProducts={this.refreshProducts} history={history} />
+            )}
+          />
+          {/* <Route path="/create" component={Form} /> */}
         </Fragment>
       </Router>
     );
